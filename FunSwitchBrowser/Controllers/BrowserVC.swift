@@ -18,7 +18,12 @@ class BrowserVC: UIViewController {
     var indicator = UIActivityIndicatorView(style: .medium)
     var timer: Timer?
     var timeElapsed = 0
-
+    
+    @IBOutlet weak var timerView: UIView!
+    
+    @IBOutlet weak var timerLbl: UILabel!
+    @IBOutlet weak var webParentView: UIView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.initializeWebView()
@@ -31,9 +36,10 @@ class BrowserVC: UIViewController {
     
     //MARK:- Custom Functions
     func initializeWebView() {
-        self.webView = WKWebView(frame: self.view.frame)
+        self.webView = WKWebView(frame: self.webParentView.frame)
         self.webView.navigationDelegate = self
-        self.view.addSubview(webView)
+        self.webView.uiDelegate = self
+        self.webParentView.addSubview(webView)
         self.webView.allowsBackForwardNavigationGestures = true
         self.loadUrl()
     }
@@ -90,7 +96,7 @@ extension BrowserVC: WKNavigationDelegate {
     }
     
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-        
+
         if let host = navigationAction.request.mainDocumentURL?.host {
             if host.contains(blockerUrl) {
                 if isBlockerModeActive {
@@ -100,6 +106,7 @@ extension BrowserVC: WKNavigationDelegate {
                 } else {
                     if timer == nil {
                         self.launchTimer()
+                        sendNotification()
                     }
                     decisionHandler(.allow)
                 }
@@ -114,7 +121,31 @@ extension BrowserVC: WKNavigationDelegate {
         }
     }
     
+    func webView(_ webView: WKWebView, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
+        if(challenge.protectionSpace.authenticationMethod == NSURLAuthenticationMethodServerTrust)
+        {
+            let cred = URLCredential(trust: challenge.protectionSpace.serverTrust!)
+            completionHandler(.useCredential, cred)
+        }
+        else
+        {
+            completionHandler(.performDefaultHandling, nil)
+        }
+    }
 }
+
+extension BrowserVC: WKUIDelegate {
+    func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
+        if navigationAction.targetFrame == nil || navigationAction.targetFrame?.isMainFrame == false {
+            //                if let urlToLoad = navigationAction.request {
+            //
+            //                }
+            self.webView.load(navigationAction.request)
+        }
+        return nil
+    }
+}
+
 
 //MARK:- Loader Functions
 extension BrowserVC {
@@ -133,7 +164,7 @@ extension BrowserVC {
 
 //MARK:- Notification Functions
 extension BrowserVC {
-    func sendNotification(timeElapsed: Int) {
+    func sendNotification() {
         let notifId = "notification.id.01"
         
         let center = UNUserNotificationCenter.current()
@@ -142,7 +173,7 @@ extension BrowserVC {
         
         let content = UNMutableNotificationContent()
         content.title = "Currently in Timer Mode"
-        content.body = "Browsing youtube for \(timeElapsed) seconds"
+        content.body = "Browsing youtube now."
         content.userInfo = ["custom-payload-id":"notification.id.01"]
         
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 0.001, repeats: false)
@@ -165,12 +196,24 @@ extension BrowserVC {
     @objc func fireTimer() {
         timeElapsed += 1
         print("timeElapsed", timeElapsed)
-        sendNotification(timeElapsed: timeElapsed)
+        
+        DispatchQueue.main.async {
+            self.timerLbl.text = "You have been browsing youtube for \(self.getTimeInHours(time: self.timeElapsed)) hours."
+        }
+        
     }
     
     func launchTimer() {
+        self.timerView.isHidden = false
         if timer != nil { self.timer?.invalidate() }
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(fireTimer), userInfo: nil, repeats: true)
         
+    }
+    
+    func getTimeInHours(time: Int) -> String {
+        let hours = time / 3600
+        let minutes = time / 60 % 60
+        let seconds = time % 60
+        return String(format:"%02i:%02i:%02i", hours, minutes, seconds)
     }
 }
