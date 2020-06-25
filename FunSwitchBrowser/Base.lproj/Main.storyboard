@@ -151,7 +151,23 @@
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZX5-fY-ZOS">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="818"/>
+                                        <subviews>
+                                            <wkWebView contentMode="scaleToFill" allowsBackForwardNavigationGestures="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SXR-LD-fJ8">
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="818"/>
+                                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <wkWebViewConfiguration key="configuration">
+                                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                                    <wkPreferences key="preferences"/>
+                                                </wkWebViewConfiguration>
+                                            </wkWebView>
+                                        </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="SXR-LD-fJ8" secondAttribute="bottom" id="2UY-Le-Az2"/>
+                                            <constraint firstItem="SXR-LD-fJ8" firstAttribute="leading" secondItem="ZX5-fY-ZOS" secondAttribute="leading" id="4oQ-xR-QyS"/>
+                                            <constraint firstAttribute="trailing" secondItem="SXR-LD-fJ8" secondAttribute="trailing" id="sCE-He-vcB"/>
+                                            <constraint firstItem="SXR-LD-fJ8" firstAttribute="top" secondItem="ZX5-fY-ZOS" secondAttribute="top" id="uf5-yO-Wye"/>
+                                        </constraints>
                                     </view>
                                 </subviews>
                             </stackView>
@@ -168,7 +184,7 @@
                     <connections>
                         <outlet property="timerLbl" destination="721-RV-oq8" id="31s-tN-r4n"/>
                         <outlet property="timerView" destination="GsO-us-ljr" id="Xhz-bc-u1L"/>
-                        <outlet property="webParentView" destination="ZX5-fY-ZOS" id="83i-xt-vp7"/>
+                        <outlet property="webView" destination="SXR-LD-fJ8" id="Rnt-sk-XdZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UEu-8x-8r8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

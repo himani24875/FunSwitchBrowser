@@ -19,9 +19,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         center.requestAuthorization(options: [.alert, .sound]) { (granted, error) in
             // Enable or disable features based on authorization.
             if error != nil {
-                print("Request authorization failed!")
+//                print("Request authorization failed!")
             } else {
-                print("Request authorization succeeded!")
+//                print("Request authorization succeeded!")
 //                self.showAlert()
             }
         }

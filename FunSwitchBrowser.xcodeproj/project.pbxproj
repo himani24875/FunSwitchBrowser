@@ -15,6 +15,9 @@
 		F61A970124A3C4E50026A054 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F61A96FF24A3C4E50026A054 /* LaunchScreen.storyboard */; };
 		F61A970B24A3C6CE0026A054 /* SettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61A970A24A3C6CE0026A054 /* SettingsVC.swift */; };
 		F61A970D24A3C6E10026A054 /* BrowserVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61A970C24A3C6E10026A054 /* BrowserVC.swift */; };
+		F6BB82B024A4A3240091FFDB /* GlobalFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6BB82AF24A4A3240091FFDB /* GlobalFunctions.swift */; };
+		F6BB82B324A4A5890091FFDB /* ConstantManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6BB82B224A4A5890091FFDB /* ConstantManager.swift */; };
+		F6BB82B624A4ACC50091FFDB /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F6BB82B524A4ACC50091FFDB /* WebKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +31,9 @@
 		F61A970224A3C4E50026A054 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F61A970A24A3C6CE0026A054 /* SettingsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsVC.swift; sourceTree = "<group>"; };
 		F61A970C24A3C6E10026A054 /* BrowserVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowserVC.swift; sourceTree = "<group>"; };
+		F6BB82AF24A4A3240091FFDB /* GlobalFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalFunctions.swift; sourceTree = "<group>"; };
+		F6BB82B224A4A5890091FFDB /* ConstantManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstantManager.swift; sourceTree = "<group>"; };
+		F6BB82B524A4ACC50091FFDB /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -35,6 +41,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F6BB82B624A4ACC50091FFDB /* WebKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -46,6 +53,7 @@
 			children = (
 				F61A96F324A3C4E30026A054 /* FunSwitchBrowser */,
 				F61A96F224A3C4E30026A054 /* Products */,
+				F6BB82B424A4ACC50091FFDB /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -60,6 +68,8 @@
 		F61A96F324A3C4E30026A054 /* FunSwitchBrowser */ = {
 			isa = PBXGroup;
 			children = (
+				F6BB82B124A4A56E0091FFDB /* Constants */,
+				F6BB82AE24A4A2FB0091FFDB /* Utility */,
 				F61A970924A3C5250026A054 /* Controllers */,
 				F61A970824A3C4FF0026A054 /* LifeCycle */,
 				F61A96FA24A3C4E30026A054 /* Main.storyboard */,
@@ -87,6 +97,30 @@
 				F61A970C24A3C6E10026A054 /* BrowserVC.swift */,
 			);
 			path = Controllers;
+			sourceTree = "<group>";
+		};
+		F6BB82AE24A4A2FB0091FFDB /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				F6BB82AF24A4A3240091FFDB /* GlobalFunctions.swift */,
+			);
+			path = Utility;
+			sourceTree = "<group>";
+		};
+		F6BB82B124A4A56E0091FFDB /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				F6BB82B224A4A5890091FFDB /* ConstantManager.swift */,
+			);
+			path = Constants;
+			sourceTree = "<group>";
+		};
+		F6BB82B424A4ACC50091FFDB /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F6BB82B524A4ACC50091FFDB /* WebKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -162,9 +196,11 @@
 			files = (
 				F61A970D24A3C6E10026A054 /* BrowserVC.swift in Sources */,
 				F61A96F924A3C4E30026A054 /* ViewController.swift in Sources */,
+				F6BB82B024A4A3240091FFDB /* GlobalFunctions.swift in Sources */,
 				F61A970B24A3C6CE0026A054 /* SettingsVC.swift in Sources */,
 				F61A96F524A3C4E30026A054 /* AppDelegate.swift in Sources */,
 				F61A96F724A3C4E30026A054 /* SceneDelegate.swift in Sources */,
+				F6BB82B324A4A5890091FFDB /* ConstantManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -26,14 +26,14 @@ class ViewController: UIViewController {
     //MARK:- Custom Functions
 
     func loadBlockerVC() {
-        let blockerVC = (self.storyboard?.instantiateViewController(identifier: "BlockerVC") ?? UIViewController())
+        let blockerVC = (self.storyboard?.instantiateViewController(identifier: ConstantManager.VC_IDENTIFIER.BLOCKER_VC) ?? UIViewController())
         blockerVC.providesPresentationContextTransitionStyle = true
         blockerVC.modalPresentationStyle = .overCurrentContext
         self.navigationController?.pushViewController(blockerVC, animated: true)
     }
     
     func loadBrowserVC(urlString: String) {
-        let browserVC = (self.storyboard?.instantiateViewController(identifier: "BrowserVC") ?? UIViewController()) as BrowserVC
+        let browserVC = (self.storyboard?.instantiateViewController(identifier: ConstantManager.VC_IDENTIFIER.BROWSER_VC) ?? UIViewController()) as BrowserVC
         browserVC.providesPresentationContextTransitionStyle = true
         browserVC.modalPresentationStyle = .overCurrentContext
         browserVC.urlString = urlString
@@ -42,7 +42,7 @@ class ViewController: UIViewController {
     }
     
     func loadSettingsVC() {
-        let settingsVC = (self.storyboard?.instantiateViewController(identifier: "SettingsVC") ?? UIViewController()) as SettingsVC
+        let settingsVC = (self.storyboard?.instantiateViewController(identifier: ConstantManager.VC_IDENTIFIER.SETTING_VC) ?? UIViewController()) as SettingsVC
         settingsVC.delegate = self
         settingsVC.providesPresentationContextTransitionStyle = true
         settingsVC.modalPresentationStyle = .fullScreen
@@ -53,7 +53,7 @@ class ViewController: UIViewController {
     //MARK:- Button Actions
     @IBAction func nSearchBtnClicked(_ sender: UIButton) {
         if let searchText = self.searchTxtField.text {
-            if searchText.lowercased().contains("youtube.com"), isBlockerModeActive {
+            if searchText.lowercased().contains(ConstantManager.BLOCKER_URL), isBlockerModeActive {
                 self.loadBlockerVC()
             } else {
                 self.loadBrowserVC(urlString: searchText)
